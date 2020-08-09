@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>JavaScript 101</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body onmousedown="show_coords(event)" onkeyup="whichButton(event)">
+    <input type="text" id="c" onchange="changeC()">C
+    <input type="text" id="f" onchange="changeF()">F
+
+    <input type="button" onclick="sayHello()" value="Say Hello" />
+    Enter your name: <input type="text" id="fname" onblur="upperCase()">
+    <input name="myInput" type="text" size="20"><br />
+    <input name="myInput" type="text" size="20"><br />
+    <input name="myInput" type="text" size="20"><br /> <br />
+    <input type="button" onclick="getElements()" value="How many elements named 'myInput'?">
+
+    <a name="first">First anchor</a><br />
+    <a name="second">Second anchor</a><br />
+    <a name="third">Third anchor</a><br /> <br />
+
+    <form id="Form1" name="Form1">
+        Your name: <input type="text">
+    </form>
+    <form id="Form2" name="Form2">
+        Your car: <input type="text">
+    </form>
+    <p> To access an item in a collection you can either use the number or the name of the item: </p>
+    <script type="text/javascript">
+        document.write("<p>The first form's name is: " + document.forms[0].name + "</p>")
+        document.write("<p>The first form's name is: " + document.getElementById("Form1").name + "</p>")
+    </script>
+
+    <p>Click in the document. An alert box will alert the x and y coordinates of the cursor.</p>
+    <p><b>Note:</b> Make sure the right frame has focus when trying this example!</p>
+    <p>Press a key on your keyboard. An alert box will alert the unicode of the key pressed.</p>
+
+    <script type="text/javascript">
+        function whichElement(e) {
+            var targ
+            if (!e) var e = window.event
+            if (e.target) targ = e.target
+            else if (e.srcElement) targ = e.srcElement
+            if (targ.nodeType == 3)
+
+                // defeat Safari bug          
+
+                targ = targ.parentNode
+            var tname
+            tname = targ.tagName
+            alert("You clicked on a " + tname + " element.")
+        }
+    </script>
+    <div onmousedown="whichElement(event)">
+        <p>Click somewhere in the document. An alert box will alert the tag name of the element you clicked on.</p>
+        <h3>This is a header</h3>
+        <p>This is a paragraph</p>
+        <img border="0" src="ball16.gif" width="29" height="28" alt="Ball">
+    </div>
+
+
+    <script src="main.js"></script>
+    <script src="java.js"></script>
+</body>
+
+</html>

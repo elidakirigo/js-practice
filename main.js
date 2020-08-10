@@ -11,28 +11,24 @@ for (var i in colors) {
 try {
     runSomeCode();
 } catch (err) {
-    var txt = "There was an error on this page.\n\n" + "Error description: " + err.description + "\n\n";
-    alert(txt)
+    var txt = "There was an error on this page.\n\n" 
+    + "Error description: " + err.description 
+    + "\n\n";
+    console.log(txt)
 }
 var myDate = new Date();
 myDate.setFullYear(2007, 2, 14);
 var today = new Date();
 var nextWeek = today + 7;
 if (nextWeek > today) {
-    alert("You have less than one week left");
+    console.log("You have less than one week left");
 }
 if (Math.cos(Math.PI) != 0) {
-    alert("Something is wrong with Math.cos");
+    console.log("Something is wrong with Math.cos");
 }
 
-function changeF() {
-    var cText = document.getElementById("c");
-    var fText = document.getElementById("f"); /* ... */
-}
 /* ... */
-function sayHello() {
-    alert("Hello World")
-}
+
 var a = 33;
 var b = 10;
 var c = "Test";
@@ -43,182 +39,9 @@ result = a + b;
 document.write(result);
 document.write(linebreak);
 
-document.write("a - b = ");
-result = a - b;
-document.write(result);
-document.write(linebreak);
 
-document.write("a / b = ");
-result = a / b;
-document.write(result);
-document.write(linebreak);
-
-document.write("a % b = ");
-result = a % b;
-document.write(result);
-document.write(linebreak);
-
-document.write("a + b + c = ");
-result = a + b + c;
-document.write(result);
-document.write(linebreak);
-a = a++;
-document.write("a++ = ");
-result = a++;
-document.write(result);
-document.write(linebreak);
-
-b = b--;
-document.write("b-- = ");
-result = b--;
-document.write(result);
-document.write(linebreak);
-
-var a = 10;
-var b = 20;
-var linebreak = "<br />";
-
-document.write("(a == b) => ");
-result = (a == b);
-document.write(result);
-document.write(linebreak);
-
-document.write("(a < b) => ");
-result = (a < b);
-document.write(result);
-document.write(linebreak);
-
-document.write("(a > b) => ");
-result = (a > b);
-document.write(result);
-document.write(linebreak);
-document.write("(a != b) => ");
-result = (a != b);
-document.write(result);
-document.write(linebreak);
-
-document.write("(a >= b) => ");
-result = (a >= b);
-document.write(result);
-document.write(linebreak);
-
-document.write("(a <= b) => ");
-result = (a <= b);
-document.write(result);
-document.write(linebreak);
-var a = true;
-var b = false;
-var linebreak = "<br />";
-
-document.write("(a &&  b) => ");
-result = (a && b);
-document.write(result);
-document.write(linebreak);
-
-document.write("(a || b) => ");
-result = (a || b);
-document.write(result);
-document.write(linebreak);
-
-document.write("!(a && b) => ");
-result = (!(a && b));
-document.write(result);
-document.write(linebreak);
-var a = 2; // Bit presentation 10 
-var b = 3; // Bit presentation 11 
-var linebreak = "<br />";
-
-document.write("(a &  b) => ");
-result = (a & b);
-document.write(result);
-document.write(linebreak);
-
-document.write("(a | b) => ");
-result = (a | b);
-document.write(result);
-document.write(linebreak);
-
-document.write("(a ^ b) => ");
-result = (a ^ b);
-document.write(result);
-document.write(linebreak);
-
-document.write("(~b) => ");
-result = (~b);
-document.write(result);
-document.write(linebreak);
-
-document.write("(a << b) => ");
-result = (a << b);
-document.write(result);
-document.write(linebreak);
-
-document.write("(a >> b) => ");
-result = (a >> b);
-document.write(result);
-document.write(linebreak);
-var a = 10;
-var b = 20;
-var linebreak = "<br />";
-
-document.write("((a > b) ? 100 : 200) => ");
-result = (a > b) ? 100 : 200;
-document.write(result);
-document.write(linebreak);
-
-document.write("((a < b) ? 100 : 200) => ");
-result = (a < b) ? 100 : 200;
-document.write(result);
-document.write(linebreak);
-
-var foo = 'calling out this part of the code';
-
-function upperCase() {
-    var x = document.getElementById("fname").value;
-    document.getElementById("fname").value = x.toUpperCase();
-}
-// Constructor of the MyObject 
-function MyObject(name, size) {
-    this.name = name;
-    this.size = size;
-}
-// Add a function to the prototype 
-MyObject.prototype.tellSize = function () {
-    alert("size of " + this.name + "is" + this.size);
-}
-// Create an instance of the object. The new object has tellSize() method. 
-
-var myObj = new MyObject("Sang", "30 inches");
-
-myObj.tellSize();
-
-function getElement() {
-    var x = document.getElementById("myHeader")
-    alert("I am a " + x.tagName + " element")
-}
-
-<h1 id = "myHeader"onclick = "getElement()" > Click to see what element I am! </h1> 
-
-function getElements() {
-    var x = document.getElementsByName("myInput")
-    alert(x.length + " elements!")
-}
-
-document.write(document.anchors[0].innerHTML)
-
-function show_coords(event) {
-    x = event.clientX
-    y = event.clientY
-    alert("X coords: " + x + ", Y coords: " + y)
-}
-
-function whichButton(event) {
-    alert(event.keyCode)
-}
 var cody = new Object();
-// then fill the cody object with properties (using dot notation) cody.living = true; cody.age = 33;
-// live code: http: //jsfiddle.net/javascriptenlightenment/ckVA5/
-15
+
 cody.gender = 'male';
 console.log(cody); // logs Object {living = true, age = 33, gender = 'male'}
 var cody = new Object();

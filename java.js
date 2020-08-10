@@ -1,70 +1,4 @@
 // eloquent
-let total = 0,
-    count = 1;
-while (count <= 10) {
-    total += count;
-    count += 1;
-}
-console.log(total); // → 55
-
-function factorial(n) {
-    if (n == 0) {
-        return 1;
-    } else {
-        return factorial(n - 1) * n;
-    }
-}
-
-let theNumber = Number(prompt("Pick a number"));
-if (!Number.isNaN(theNumber)) {
-    console.log("Your number is the square root of " + theNumber * theNumber);
-}
-
-function findSolution(target) {
-    function find(current, history) {
-        if (current == target) {
-            return history;
-        } else if (current > target) {
-            return null;
-        } else {
-            return find(current + 5, `(${history} + 5)`) || find(current * 3, `(${history} * 3)`);
-        }
-    }
-    return find(1, "1");
-}
-console.log(findSolution(24)); // → (((1 * 3) + 5) * 3)
-
-find(1, "1") find(6, "(1 + 5)") find(11, "((1 + 5) + 5)") find(16, "(((1 + 5) + 5) + 5)") too big find(33, "(((1 + 5) + 5) * 3)") too big find(18, "((1 + 5) * 3)") too big find(3, "(1 * 3)") find(8, "((1 * 3) + 5)") find(13, "(((1 * 3) + 5) + 5)") found!
-
-    function printFarmInventory(cows, chickens) {
-        let cowString = String(cows);
-        while (cowString.length < 3) {
-            cowString = "0" + cowString;
-        }
-        console.log(`${cowString} Cows`);
-        let chickenString = String(chickens);
-        while (chickenString.length < 3) {
-            chickenString = "0" + chickenString;
-        }
-        console.log(`${chickenString} Chickens`);
-    }
-printFarmInventory(7, 11);
-
-function printZeroPaddedWithLabel(number, label) {
-    let numberString = String(number);
-    while (numberString.length < 3) {
-        numberString = "0" + numberString;
-    }
-    console.log(`${numberString} ${label}`);
-}
-
-function printFarmInventory(cows, chickens, pigs) {
-    printZeroPaddedWithLabel(cows, "Cows");
-    printZeroPaddedWithLabel(chickens, "Chickens");
-    printZeroPaddedWithLabel(pigs, "Pigs");
-}
-printFarmInventory(7, 11, 3);
-
 function zeroPad(number, width) {
     let string = String(number);
     while (string.length < width) {
@@ -154,10 +88,9 @@ repeat(3, n => {
         console.log(n, "is even");
     });
 }); // → 0 is even // → 2 is even
-There is a built - in array method, forEach, that provides something like a
-for / of loop as a higher - order
+// There is a built - in array method, forEach, that provides something like a
+// for / of loop as a higher - order
 
-function.
 ["A", "B"].forEach(l => console.log(l)); // → A // → B
 
 function filter(array, test) {
@@ -363,7 +296,7 @@ class SymmetricMatrix extends Matrix {
         }
     }
 
-    function canYouSpotTheProblem() {
+    canYouSpotTheProblem() {
         "use strict";
         for (counter = 0; counter < 10; counter++) {
             console.log("Happy happy");
@@ -371,410 +304,437 @@ class SymmetricMatrix extends Matrix {
     }
     canYouSpotTheProblem(); // → ReferenceError: counter is not defined
 
-    function test(label, body) {
+    test(label, body) {
         if (!body()) console.log(`Failed: ${label}`);
     }
-    test("convert Latin text to uppercase", () => {
-        return "hello".toUpperCase() == "HELLO";
+}
+
+function numberToString(n, base = 10) {
+    let result = "",
+        sign = "";
+    if (n < 0) {
+        sign = "-";
+        n = -n;
+    }
+    do {
+        result = String(n % base) + result;
+        n /= base;
+    } while (n > 0);
+    return sign + result;
+
+}
+console.log(numberToString(13, 10)); // → 1.5e-3231.3e-3221.3e-3211.3e-3201.3e-3191.3e…-3181.3
+
+for (;;) {
+    try {
+        let dir = promtDirection("Where?"); // ← typo! 
+        console.log("You chose ", dir);
+        break;
+    } catch (e) {
+        console.log("Not a valid direction. Try again.");
+    }
+}
+
+class InputError extends Error {}
+
+function promptDirection(question) {
+    let result = prompt(question);
+    if (result.toLowerCase() == "left") return "L";
+    if (result.toLowerCase() == "right") return "R";
+    throw new InputError("Invalid direction: " + result);
+}
+
+for (;;) {
+    try {
+        let dir = promptDirection("Where?");
+        console.log("You chose ", dir);
+        break;
+    } catch (e) {
+        if (e instanceof InputError) {
+            console.log("Not a valid direction. Try again.");
+        } else {
+            throw e;
+        }
+    }
+}
+
+let dateTime = /\d\d-\d\d-\d\d\d\d \d\d:\d\d/;
+console.log(dateTime.test("01-30-2003 15:20")); // → true console.log(dateTime.test("30-jan-2003 15:20")); // → false
+
+let neighbor = /neighbou?r/;
+console.log(neighbor.test("neighbour")); // → true console.log(neighbor.test("neighbor")); // → true
+
+let quotedText = /'([^']*)'/;
+console.log(quotedText.exec("she said 'hello'")); // → ["'hello'", "hello"]
+
+function getDate(string) {
+    let [_, month, day, year] = /(\d{1,2})-(\d{1,2})-(\d{4})/.exec(string);
+    return new Date(year, month - 1, day);
+}
+console.log(getDate("1-30-2003")); // → Thu Jan 30 2003 00:00:00 GMT+0100 (CET)
+
+console.log("Liskov, Barbara\nMcCarthy, John\nWadler, Philip".replace(/(\w+), (\w+)/g, "$2 $1")); // → Barbara Liskov // John McCarthy // Philip Wadler
+
+let s = "the cia and fbi";
+console.log(s.replace(/\b(fbi|cia)\b/g, str => str.toUpperCase())); // → the CIA and FBI
+// Here’ s a more interesting one:
+let stock = "1 lemon, 2 cabbages, and 101 eggs";
+
+function minusOne(match, amount, unit) {
+    amount = Number(amount) - 1;
+    if (amount == 1) { // only one left, remove the 's' 
+        unit = unit.slice(0, unit.length - 1);
+    } else if (amount == 0) {
+        amount = "no";
+    }
+    return amount + " " + unit;
+}
+console.log(stock.replace(/(\d+) (\w+)/g, minusOne)); // → no lemon, 1 cabbage, and 100 eggs
+
+function stripComments(code) {
+    return code.replace(/\/\/.*|\/\*[^]*\*\//g, "");
+}
+console.log(stripComments("1 + /* 2 */3")); // → 1 + 3
+
+let name = "harry";
+let text = "Harry is a suspicious character.";
+let regexp = new RegExp("\\b(" + name + ")\\b", "gi");
+console.log(text.replace(regexp, "_$1_"));
+
+let name = "dea+hl[]rd";
+let text = "This dea+hl[]rd guy is super annoying.";
+let escaped = name.replace(/[\\[.+*?(){|^$]/g, "\\$&");
+let regexp = new RegExp("\\b" + escaped + "\\b", "gi");
+console.log(text.replace(regexp, "_$&_")); // → This _dea+hl[]rd_ guy is super annoying.
+
+let pattern = /y/g;
+pattern.lastIndex = 3;
+let match = pattern.exec("xyzzy");
+console.log(match.index); // → 4 console.log(pattern.lastIndex); // → 5
+
+let digit = /\d/g;
+console.log(digit.exec("here it is: 1")); // → ["1"] console.log(digit.exec("and now: 1")); // → null
+
+function parseINI(string) { // Start with an object to hold the top-level fields 
+    let result = {};
+    let section = result;
+    string.split(/\r?\n/).forEach(line => {
+        let match;
+        if (match = line.match(/^(\w+)=(.*)$/)) {
+            section[match[1]] = match[2];
+        } else if (match = line.match(/^\[(.*)\]$/)) {
+            section = result[match[1]] = {};
+        } else if (!/^\s*(;.*)?$/.test(line)) {
+            throw new Error("Line '" + line + "' is not valid.");
+        }
     });
-    test("convert Greek text to uppercase", () => {
-        return "Χαίρετε".toUpperCase() == "ΧΑΊΡΕΤΕ";
+    return result;
+}
+console.log(parseINI(` name=Vasilis [address] city=Tessaloniki`)); // → {name: "Vasilis", address: {city: "Tessaloniki"}}
+
+const weekDay = function () {
+    const names = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    return {
+        name(number) {
+            return names[number];
+        },
+        number(name) {
+            return names.indexOf(name);
+        }
+    };
+}();
+console.log(weekDay.name(weekDay.number("Sunday"))); // → Sunday
+
+let fifteen = Promise.resolve(15);
+fifteen.then(value => console.log(`Got ${value}`)); // → Got 15
+
+function storage(nest, name) {
+    return new Promise(resolve => {
+        nest.readStorage(name, result => resolve(result));
     });
-    test("don't convert case-less characters", () => {
-                return "௷ఆࢎ࠶߈".toUpperCase() == " ";
+}
+storage(bigOak, "enemies").then(value => console.log("Got", value));
 
-                function numberToString(n, base = 10) {
-                    let result = "",
-                        sign = "";
-                    if (n < 0) {
-                        sign = "-";
-                        n = -n;
-                    }
-                    do {
-                        result = String(n % base) + result;
-                        n /= base;
-                    } while (n > 0);
-                    return sign + result;
+new Promise((_, reject) => reject(new Error("Fail"))).then(value => console.log("Handler 1")).catch(reason => {
+    console.log("Caught failure " + reason);
+    return "nothing";
+}).then(value => console.log("Handler 2", value)); // → Caught failure Error: Fail // → Handler 2 nothing
 
-                }
-                console.log(numberToString(13, 10)); // → 1.5e-3231.3e-3221.3e-3211.3e-3201.3e-3191.3e…-3181.3
+class Timeout extends Error {}
 
-                for (;;) {
-                    try {
-                        let dir = promtDirection("Where?"); // ← typo! console.log("You chose ", dir); break; } catch (e) { console.log("Not a valid direction. Try again."); } }
+function request(nest, target, type, content) {
+    return new Promise((resolve, reject) => {
+        let done = false;
 
-                        class InputError extends Error {}
+        function attempt(n) {
+            nest.send(target, type, content, (failed, value) => {
+                done = true;
+                if (failed) reject(failed);
+                else resolve(value);
+            });
+            setTimeout(() => {
+                if (done) return;
+                else if (n < 3) attempt(n + 1);
+                else reject(new Timeout("Timed out"));
+            }, 250);
+        }
+        attempt(1);
+    });
+}
 
-                        function promptDirection(question) {
-                            let result = prompt(question);
-                            if (result.toLowerCase() == "left") return "L";
-                            if (result.toLowerCase() == "right") return "R";
-                            throw new InputError("Invalid direction: " + result);
-                        }
+function requestType(name, handler) {
+    defineRequestType(name, (nest, content, source, callback) => {
+        try {
+            Promise.resolve(handler(nest, content, source)).then(response => callback(null, response), failure => callback(failure));
+        } catch (exception) {
+            callback(exception);
+        }
+    });
+}
 
-                        for (;;) {
-                            try {
-                                let dir = promptDirection("Where?");
-                                console.log("You chose ", dir);
-                                break;
-                            } catch (e) {
-                                if (e instanceof InputError) {
-                                    console.log("Not a valid direction. Try again.");
-                                } else {
-                                    throw e;
-                                }
-                            }
-                        }
+requestType("ping", () => "pong");
 
-                        let dateTime = /\d\d-\d\d-\d\d\d\d \d\d:\d\d/;
-                        console.log(dateTime.test("01-30-2003 15:20")); // → true console.log(dateTime.test("30-jan-2003 15:20")); // → false
+function availableNeighbors(nest) {
+    let requests = nest.neighbors.map(neighbor => {
+        return request(nest, neighbor, "ping").then(() => true, () => false);
+    });
+    return Promise.all(requests).then(result => {
+        return nest.neighbors.filter((_, i) => result[i]);
+    });
+}
 
-                        let neighbor = /neighbou?r/;
-                        console.log(neighbor.test("neighbour")); // → true console.log(neighbor.test("neighbor")); // → true
+requestType("connections", (nest, {
+    name,
+    neighbors
+}, source) => {
+    let connections = nest.state.connections;
+    if (JSON.stringify(connections.get(name)) == JSON.stringify(neighbors)) return;
+    connections.set(name, neighbors);
+    broadcastConnections(nest, name, source);
+});
 
-                        let quotedText = /'([^']*)'/;
-                        console.log(quotedText.exec("she said 'hello'")); // → ["'hello'", "hello"]
+function broadcastConnections(nest, name, exceptFor = null) {
+    for (let neighbor of nest.neighbors) {
+        if (neighbor == exceptFor) continue;
+        request(nest, neighbor, "connections", {
+            name,
+            neighbors: nest.state.connections.get(name)
+        });
+    }
+}
+everywhere(nest => {
+    nest.state.connections = new Map;
+    nest.state.connections.set(nest.name, nest.neighbors);
+    broadcastConnections(nest, nest.name);
+});
 
-                        function getDate(string) {
-                            let [_, month, day, year] = /(\d{1,2})-(\d{1,2})-(\d{4})/.exec(string);
-                            return new Date(year, month - 1, day);
-                        }
-                        console.log(getDate("1-30-2003")); // → Thu Jan 30 2003 00:00:00 GMT+0100 (CET)
+function routeRequest(nest, target, type, content) {
+    if (nest.neighbors.includes(target)) {
+        return request(nest, target, type, content);
+    } else {
+        let via = findRoute(nest.name, target, nest.state.connections);
+        if (!via) throw new Error(`No route to ${target}`);
+        return request(nest, via, "route", {
+            target,
+            type,
+            content
+        });
+    }
+}
+requestType("route", (nest, {
+    target,
+    type,
+    content
+}) => {
+    return routeRequest(nest, target, type, content);
+});
 
-                        console.log("Liskov, Barbara\nMcCarthy, John\nWadler, Philip".replace(/(\w+), (\w+)/g, "$2 $1")); // → Barbara Liskov // John McCarthy // Philip Wadler
+async function findInStorage(nest, name) {
+    let local = await storage(nest, name);
+    if (local != null) return local;
+    let sources = network(nest).filter(n => n != nest.name);
+    while (sources.length > 0) {
+        let source = sources[Math.floor(Math.random() *
+            sources.length)];
+        sources = sources.filter(n => n != source);
+        try {
+            let found = await routeRequest(nest, source, "storage", name);
+            if (found != null) return found;
+        } catch (_) {}
+    }
+    throw new Error("Not found");
+}
 
-                        let s = "the cia and fbi";
-                        console.log(s.replace(/\b(fbi|cia)\b/g, str => str.toUpperCase())); // → the CIA and FBI
-                        Here’ s a more interesting one:
-                            let stock = "1 lemon, 2 cabbages, and 101 eggs";
+try {
+    setTimeout(() => {
+        throw new Error("Woosh");
+    }, 20);
+} catch (_) { // This will not run 
+    console.log("Caught!");
+}
 
-                        function minusOne(match, amount, unit) {
-                            amount = Number(amount) - 1;
-                            if (amount == 1) { // only one left, remove the 's' unit = unit.slice(0, unit.length - 1); } else if (amount == 0) { amount = "no"; } return amount + " " + unit; } console.log(stock.replace(/(\d+) (\w+)/g, minusOne)); // → no lemon, 1 cabbage, and 100 eggs
+let start = Date.now();
+setTimeout(() => {
+    console.log("Timeout ran at", Date.now() - start);
+}, 20);
+while (Date.now() < start + 50) {}
+console.log("Wasted time until", Date.now() - start); // → Wasted time until 50 // → Timeout ran at 55
 
-                                function stripComments(code) {
-                                    return code.replace(/\/\/.*|\/\*[^]*\*\//g, "");
-                                }
-                                console.log(stripComments("1 + /* 2 */3")); // → 1 + 3
+function anyStorage(nest, source, name) {
+    if (source == nest.name) return storage(nest, name);
+    else return routeRequest(nest, source, "storage", name);
+}
+async function chicks(nest, year) {
+    let list = "";
+    await Promise.all(network(nest).map(async name => {
+        list += `${name}: ${ await anyStorage(nest, name, `chicks in ${year}`) }\n`;
+    }));
+    return list;
+}
 
-                                let name = "harry";
-                                let text = "Harry is a suspicious character.";
-                                let regexp = new RegExp("\\b(" + name + ")\\b", "gi");
-                                console.log(text.replace(regexp, "_$1_"));
+function parseExpression(program) {
+    program = skipSpace(program);
+    let match, expr;
+    if (match = /^"([^"]*)"/.exec(program)) {
+        expr = {
+            type: "value",
+            value: match[1]
+        };
+    } else if (match = /^\d+\b/.exec(program)) {
+        expr = {
+            type: "value",
+            value: Number(match[0])
+        };
+    } else if (match = /^[^\s(),#"]+/.exec(program)) {
+        expr = {
+            type: "word",
+            name: match[0]
+        };
+    } else {
+        throw new SyntaxError("Unexpected syntax: " + program);
+    }
+    return parseApply(expr, program.slice(match[0].length));
+}
 
-                                let name = "dea+hl[]rd";
-                                let text = "This dea+hl[]rd guy is super annoying.";
-                                let escaped = name.replace(/[\\[.+*?(){|^$]/g, "\\$&");
-                                let regexp = new RegExp("\\b" + escaped + "\\b", "gi");
-                                console.log(text.replace(regexp, "_$&_")); // → This _dea+hl[]rd_ guy is super annoying.
+function skipSpace(string) {
+    let first = string.search(/\S/);
+    if (first == -1) return "";
+    return string.slice(first);
+}
 
-                                let pattern = /y/g;
-                                pattern.lastIndex = 3;
-                                let match = pattern.exec("xyzzy");
-                                console.log(match.index); // → 4 console.log(pattern.lastIndex); // → 5
+function parseApply(expr, program) {
+    program = skipSpace(program);
+    if (program[0] != "(") {
+        return {
+            expr: expr,
+            rest: program
+        };
+    }
+    program = skipSpace(program.slice(1));
+    expr = {
+        type: "apply",
+        operator: expr,
+        args: []
+    };
+    while (program[0] != ")") {
+        let arg = parseExpression(program);
+        expr.args.push(arg.expr);
+        program = skipSpace(arg.rest);
+        if (program[0] == ",") {
+            program = skipSpace(program.slice(1));
+        } else if (program[0] != ")") {
+            throw new SyntaxError("Expected ',' or ')'");
+        }
+    }
+    return parseApply(expr, program.slice(1));
+}
 
-                                let digit = /\d/g;
-                                console.log(digit.exec("here it is: 1")); // → ["1"] console.log(digit.exec("and now: 1")); // → null
+function parse(program) {
+    let {
+        expr,
+        rest
+    } = parseExpression(program);
+    if (skipSpace(rest).length > 0) {
+        throw new SyntaxError("Unexpected text after program");
+    }
+    return expr;
+}
+console.log(parse("+(a, 10)")); // → {type: "apply", // operator: {type: "word", name: "+"}, // args: [{type: "word", name: "a"}, // {type: "value", value: 10}]}
 
-                                function parseINI(string) { // Start with an object to hold the top-level fields let result = {}; let section = result; string.split(/\r?\n/).forEach(line => { let match; if (match = line.match(/^(\w+)=(.*)$/)) { section[match[1]] = match[2]; } else if (match = line.match(/^\[(.*)\]$/)) { section = result[match[1]] = {}; } else if (!/^\s*(;.*)?$/.test(line)) { throw new Error("Line '" + line + "' is not valid."); } }); return result; }
-                                    console.log(parseINI(` name=Vasilis [address] city=Tessaloniki`)); // → {name: "Vasilis", address: {city: "Tessaloniki"}}
+specialForms.define = (args, scope) => {
+    if (args.length != 2 || args[0].type != "word") {
+        throw new SyntaxError("Incorrect use of define");
+    }
+    let value = evaluate(args[1], scope);
+    scope[args[0].name] = value;
+    return value;
+}
 
-                                    const weekDay = function () {
-                                        const names = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                                        return {
-                                            name(number) {
-                                                return names[number];
-                                            },
-                                            number(name) {
-                                                return names.indexOf(name);
-                                            }
-                                        };
-                                    }();
-                                    console.log(weekDay.name(weekDay.number("Sunday"))); // → Sunday
+function talksAbout(node, string) {
+    if (node.nodeType == Node.ELEMENT_NODE) {
+        for (let i = 0; i < node.childNodes.length; i++) {
+            if (talksAbout(node.childNodes[i], string)) {
+                return true;
+            }
+        }
+        return false;
+    } else if (node.nodeType == Node.TEXT_NODE) {
+        return node.nodeValue.indexOf(string) > -1;
+    }
+}
+console.log(talksAbout(document.body, "book")); // → true
 
-                                    let fifteen = Promise.resolve(15);
-                                    fifteen.then(value => console.log(`Got ${value}`)); // → Got 15
+function elt(type, ...children) {
+    let node = document.createElement(type);
+    for (let child of children) {
+        if (typeof child != "string") node.appendChild(child);
+        else node.appendChild(document.createTextNode(child));
+    }
+    return node;
+}
+document.getElementById("quote").appendChild(elt("footer", "—", elt("strong", "Karl Popper"), ", preface to the second editon of ", elt("em", "The Open Society and Its Enemies"), ", 1950"));
 
-                                    function storage(nest, name) {
-                                        return new Promise(resolve => {
-                                            nest.readStorage(name, result => resolve(result));
-                                        });
-                                    }
-                                    storage(bigOak, "enemies").then(value => console.log("Got", value));
+function time(name, action) {
+    let start = Date.now(); // Current time in milliseconds 
+    action();
+    console.log(name, "took", Date.now() - start, "ms");
+}
+time("naive", () => {
+    let target = document.getElementById("one");
+    while (target.offsetWidth < 2000) {
+        target.appendChild(document.createTextNode("X"));
+    }
+}); // → naive took 32 ms
+time("clever", function () {
+    let target = document.getElementById("two");
+    target.appendChild(document.createTextNode("XXXXX"));
+    let total = Math.ceil(2000 / (target.offsetWidth / 5));
+    target.firstChild.nodeValue = "X".repeat(total);
+}); // → clever took 1 ms 
 
-                                    new Promise((_, reject) => reject(new Error("Fail"))).then(value => console.log("Handler 1")).catch(reason => {
-                                        console.log("Caught failure " + reason);
-                                        return "nothing";
-                                    }).then(value => console.log("Handler 2", value)); // → Caught failure Error: Fail // → Handler 2 nothing
+// <a href = "https://developer.mozilla.org/" > MDN < /a> <script> let link = document.querySelector("a"); link.addEventListener("click", event => { console.log("Nope."); event.preventDefault(); }); 
 
-                                    class Timeout extends Error {}
+window.addEventListener("keydown", event => {
+    if (event.key == " " && event.ctrlKey) {
+        console.log("Continuing!");
+    }
+});
 
-                                    function request(nest, target, type, content) {
-                                        return new Promise((resolve, reject) => {
-                                            let done = false;
+window.addEventListener("click", event => {
+    let dot = document.createElement("div");
+    dot.className = "dot";
+    dot.style.left = (event.pageX - 4) + "px";
+    dot.style.top = (event.pageY - 4) + "px";
+    document.body.appendChild(dot);
+});
 
-                                            function attempt(n) {
-                                                nest.send(target, type, content, (failed, value) => {
-                                                    done = true;
-                                                    if (failed) reject(failed);
-                                                    else resolve(value);
-                                                });
-                                                setTimeout(() => {
-                                                    if (done) return;
-                                                    else if (n < 3) attempt(n + 1);
-                                                    else reject(new Timeout("Timed out"));
-                                                }, 250);
-                                            }
-                                            attempt(1);
-                                        });
-                                    }
-
-                                    function requestType(name, handler) {
-                                        defineRequestType(name, (nest, content, source, callback) => {
-                                            try {
-                                                Promise.resolve(handler(nest, content, source)).then(response => callback(null, response), failure => callback(failure));
-                                            } catch (exception) {
-                                                callback(exception);
-                                            }
-                                        });
-                                    }
-
-                                    requestType("ping", () => "pong");
-
-                                    function availableNeighbors(nest) {
-                                        let requests = nest.neighbors.map(neighbor => {
-                                            return request(nest, neighbor, "ping").then(() => true, () => false);
-                                        });
-                                        return Promise.all(requests).then(result => {
-                                            return nest.neighbors.filter((_, i) => result[i]);
-                                        });
-                                    }
-
-                                    requestType("connections", (nest, {
-                                        name,
-                                        neighbors
-                                    }, source) => {
-                                        let connections = nest.state.connections;
-                                        if (JSON.stringify(connections.get(name)) == JSON.stringify(neighbors)) return;
-                                        connections.set(name, neighbors);
-                                        broadcastConnections(nest, name, source);
-                                    });
-
-                                    function broadcastConnections(nest, name, exceptFor = null) {
-                                        for (let neighbor of nest.neighbors) {
-                                            if (neighbor == exceptFor) continue;
-                                            request(nest, neighbor, "connections", {
-                                                name,
-                                                neighbors: nest.state.connections.get(name)
-                                            });
-                                        }
-                                    }
-                                    everywhere(nest => {
-                                        nest.state.connections = new Map;
-                                        nest.state.connections.set(nest.name, nest.neighbors);
-                                        broadcastConnections(nest, nest.name);
-                                    });
-
-                                    function routeRequest(nest, target, type, content) {
-                                        if (nest.neighbors.includes(target)) {
-                                            return request(nest, target, type, content);
-                                        } else {
-                                            let via = findRoute(nest.name, target, nest.state.connections);
-                                            if (!via) throw new Error(`No route to ${target}`);
-                                            return request(nest, via, "route", {
-                                                target,
-                                                type,
-                                                content
-                                            });
-                                        }
-                                    }
-                                    requestType("route", (nest, {
-                                        target,
-                                        type,
-                                        content
-                                    }) => {
-                                        return routeRequest(nest, target, type, content);
-                                    });
-
-                                    async function findInStorage(nest, name) {
-                                        let local = await storage(nest, name);
-                                        if (local != null) return local;
-                                        let sources = network(nest).filter(n => n != nest.name);
-                                        while (sources.length > 0) {
-                                            let source = sources[Math.floor(Math.random() *
-                                                sources.length)];
-                                            sources = sources.filter(n => n != source);
-                                            try {
-                                                let found = await routeRequest(nest, source, "storage", name);
-                                                if (found != null) return found;
-                                            } catch (_) {}
-                                        }
-                                        throw new Error("Not found");
-                                    }
-
-                                    try {
-                                        setTimeout(() => {
-                                            throw new Error("Woosh");
-                                        }, 20);
-                                    } catch (_) { // This will not run console.log("Caught!"); }
-
-                                        let start = Date.now();
-                                        setTimeout(() => {
-                                            console.log("Timeout ran at", Date.now() - start);
-                                        }, 20);
-                                        while (Date.now() < start + 50) {}
-                                        console.log("Wasted time until", Date.now() - start); // → Wasted time until 50 // → Timeout ran at 55
-
-                                        function anyStorage(nest, source, name) {
-                                            if (source == nest.name) return storage(nest, name);
-                                            else return routeRequest(nest, source, "storage", name);
-                                        }
-                                        async function chicks(nest, year) {
-                                            let list = "";
-                                            await Promise.all(network(nest).map(async name => {
-                                                list += `${name}: ${ await anyStorage(nest, name, `chicks in ${year}`) }\n`;
-                                            }));
-                                            return list;
-                                        }
-
-                                        function parseExpression(program) {
-                                            program = skipSpace(program);
-                                            let match, expr;
-                                            if (match = /^"([^"]*)"/.exec(program)) {
-                                                expr = {
-                                                    type: "value",
-                                                    value: match[1]
-                                                };
-                                            } else if (match = /^\d+\b/.exec(program)) {
-                                                expr = {
-                                                    type: "value",
-                                                    value: Number(match[0])
-                                                };
-                                            } else if (match = /^[^\s(),#"]+/.exec(program)) {
-                                                expr = {
-                                                    type: "word",
-                                                    name: match[0]
-                                                };
-                                            } else {
-                                                throw new SyntaxError("Unexpected syntax: " + program);
-                                            }
-                                            return parseApply(expr, program.slice(match[0].length));
-                                        }
-
-                                        function skipSpace(string) {
-                                            let first = string.search(/\S/);
-                                            if (first == -1) return "";
-                                            return string.slice(first);
-                                        }
-
-                                        function parseApply(expr, program) {
-                                            program = skipSpace(program);
-                                            if (program[0] != "(") {
-                                                return {
-                                                    expr: expr,
-                                                    rest: program
-                                                };
-                                            }
-                                            program = skipSpace(program.slice(1));
-                                            expr = {
-                                                type: "apply",
-                                                operator: expr,
-                                                args: []
-                                            };
-                                            while (program[0] != ")") {
-                                                let arg = parseExpression(program);
-                                                expr.args.push(arg.expr);
-                                                program = skipSpace(arg.rest);
-                                                if (program[0] == ",") {
-                                                    program = skipSpace(program.slice(1));
-                                                } else if (program[0] != ")") {
-                                                    throw new SyntaxError("Expected ',' or ')'");
-                                                }
-                                            }
-                                            return parseApply(expr, program.slice(1));
-                                        }
-
-                                        function parse(program) {
-                                            let {
-                                                expr,
-                                                rest
-                                            } = parseExpression(program);
-                                            if (skipSpace(rest).length > 0) {
-                                                throw new SyntaxError("Unexpected text after program");
-                                            }
-                                            return expr;
-                                        }
-                                        console.log(parse("+(a, 10)")); // → {type: "apply", // operator: {type: "word", name: "+"}, // args: [{type: "word", name: "a"}, // {type: "value", value: 10}]}
-
-                                        specialForms.define = (args, scope) => {
-                                            if (args.length != 2 || args[0].type != "word") {
-                                                throw new SyntaxError("Incorrect use of define");
-                                            }
-                                            let value = evaluate(args[1], scope);
-                                            scope[args[0].name] = value;
-                                            return value;
-                                        }
-
-                                        function talksAbout(node, string) {
-                                            if (node.nodeType == Node.ELEMENT_NODE) {
-                                                for (let i = 0; i < node.childNodes.length; i++) {
-                                                    if (talksAbout(node.childNodes[i], string)) {
-                                                        return true;
-                                                    }
-                                                }
-                                                return false;
-                                            } else if (node.nodeType == Node.TEXT_NODE) {
-                                                return node.nodeValue.indexOf(string) > -1;
-                                            }
-                                        }
-                                        console.log(talksAbout(document.body, "book")); // → true
-
-                                        function elt(type, ...children) {
-                                            let node = document.createElement(type);
-                                            for (let child of children) {
-                                                if (typeof child != "string") node.appendChild(child);
-                                                else node.appendChild(document.createTextNode(child));
-                                            }
-                                            return node;
-                                        }
-                                        document.getElementById("quote").appendChild(elt("footer", —"", elt("strong", "Karl Popper"), ", preface to the second editon of ", elt("em", "The Open Society and Its Enemies"), ", 1950"));
-
-                                        function time(name, action) {
-                                            let start = Date.now(); // Current time in milliseconds action(); console.log(name, "took", Date.now() - start, "ms"); }
-                                            time("naive", () => {
-                                                let target = document.getElementById("one");
-                                                while (target.offsetWidth < 2000) {
-                                                    target.appendChild(document.createTextNode("X"));
-                                                }
-                                            }); // → naive took 32 ms
-                                            time("clever", function () {
-                                                let target = document.getElementById("two");
-                                                target.appendChild(document.createTextNode("XXXXX"));
-                                                let total = Math.ceil(2000 / (target.offsetWidth / 5));
-                                                target.firstChild.nodeValue = "X".repeat(total);
-                                            }); // → clever took 1 ms 
-
-                                            <
-                                            a href = "https://developer.mozilla.org/" > MDN < /a> <script> let link = document.querySelector("a"); link.addEventListener("click", event => { console.log("Nope."); event.preventDefault(); }); 
-
-                                            window.addEventListener("keydown", event => {
-                                                if (event.key == " " && event.ctrlKey) {
-                                                    console.log("Continuing!");
-                                                }
-                                            });
-
-                                            window.addEventListener("click", event => {
-                                                let dot = document.createElement("div");
-                                                dot.className = "dot";
-                                                dot.style.left = (event.pageX - 4) + "px";
-                                                dot.style.top = (event.pageY - 4) + "px";
-                                                document.body.appendChild(dot);
-                                            });
-
-                                            let bombTimer = setTimeout(() => {
-                                                console.log("BOOM!");
-                                            }, 500);
-                                            if (Math.random() < 0.5) { // 50% chance console.log("Defused."); clearTimeout(bombTimer); }
+let bombTimer = setTimeout(() => {
+    console.log("BOOM!");
+}, 500);
+if (Math.random() < 0.5) { // 50% chance 
+    console.log("Defused.");
+    clearTimeout(bombTimer);
+}
 
 
-                                                // SVGS
+// SVGS

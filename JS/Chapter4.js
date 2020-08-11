@@ -135,3 +135,16 @@ let {
   vick: 'ytre'
 }
 // console.log(myArt);
+/**
+ * ------------------------
+ * using JSON 
+ * ------------------------
+ */
+JSON.stringify({
+  myArt: 'yellow',
+  vick: 'ytre'
+})
+JSON.parse({
+  'myArt': 'yellow',
+  'vick': 'ytre'
+})

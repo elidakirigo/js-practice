@@ -72,8 +72,8 @@ console.log(findSolution(24));
  * ----------------------
  */
 var cows = 23;
-String(cows);
-console.log(typeof cows);
+;
+console.log(String(cows));
 
 /**
  * --------------------------------------

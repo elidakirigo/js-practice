@@ -1,52 +1,3 @@
-// eloquent
-function zeroPad(number, width) {
-    let string = String(number);
-    while (string.length < width) {
-        string = "0" + string;
-    }
-    return string;
-}
-
-function printFarmInventory(cows, chickens, pigs) {
-    console.log(`${zeroPad(cows, 3)} Cows`);
-    console.log(`${zeroPad(chickens, 3)} Chickens`);
-    console.log(`${zeroPad(pigs, 3)} Pigs`);
-}
-printFarmInventory(7, 16, 3);
-
-function phi(table) {
-    return (table[3] * table[0] - table[2] * table[1]) / Math.sqrt((table[2] + table[3]) * (table[0] + table[1]) * (table[1] + table[3]) * (table[0] + table[2]));
-}
-console.log(phi([76, 9, 4, 1]));
-
-function tableFor(event, journal) {
-    let table = [0, 0, 0, 0];
-    for (let i = 0; i < journal.length; i++) {
-        let entry = journal[i],
-            index = 0;
-        if (entry.events.includes(event)) index += 1;
-        if (entry.squirrel) index += 2;
-        table[index] += 1;
-    }
-    return table;
-}
-console.log(tableFor("pizza", JOURNAL)); // → [76, 9, 4, 1]
-
-function max(...numbers) {
-    let result = -Infinity;
-    for (let number of numbers) {
-        if (number > result) result = number;
-    }
-    return result;
-}
-console.log(max(4, 1, 9, -2)); // → 9
-
-let numbers = [5, 1, 7];
-console.log(max(...numbers)); // → 7
-
-let words = ["never", "fully"];
-console.log(["will", ...words, "understand"]); // → ["will", "never", "fully", "understand"]
-
 function randomPointOnCircle(radius) {
     let angle = Math.random() * 2 * Math.PI;
     return {
@@ -80,133 +31,16 @@ function noisy(f) {
 }
 noisy(Math.min)(3, 2, 1); // → calling with [3, 2, 1] // → called with [3, 2, 1] , returned 1
 
-function unless(test, then) {
-    if (!test) then();
-}
-repeat(3, n => {
-    unless(n % 2 == 1, () => {
-        console.log(n, "is even");
-    });
-}); // → 0 is even // → 2 is even
-// There is a built - in array method, forEach, that provides something like a
-// for / of loop as a higher - order
-
-["A", "B"].forEach(l => console.log(l)); // → A // → B
-
-function filter(array, test) {
-    let passed = [];
-    for (let element of array) {
-        if (test(element)) {
-            passed.push(element);
-        }
-    }
-    return passed;
-}
-console.log(filter(SCRIPTS, script => script.living)); // → [{name: "Adlam", …}, …]
-
-function map(array, transform) {
-    let mapped = [];
-    for (let element of array) {
-        mapped.push(transform(element));
-    }
-    return mapped;
-}
-let rtlScripts = SCRIPTS.filter(s => s.direction == "rtl");
-console.log(map(rtlScripts, s => s.name)); // → ["Adlam", "Arabic", "Imperial Aramaic", …]
-
-function reduce(array, combine, start) {
-    let current = start;
-    for (let element of array) {
-        current = combine(current, element);
-    }
-    return current;
-}
-console.log(reduce([1, 2, 3, 4], (a, b) => a + b, 0)); // → 10
-
-function characterCount(script) {
-    return script.ranges.reduce((count, [from, to]) => {
-        return count + (to - from);
-    }, 0);
-}
-console.log(SCRIPTS.reduce((a, b) => {
-    return characterCount(a) < characterCount(b) ? b : a;
-})); // → {name: "Han", …}
-
-function average(array) {
-    return array.reduce((a, b) => a + b) / array.length;
-}
-console.log(Math.round(average(SCRIPTS.filter(s => s.living).map(s => s.year)))); // → 1188 console.log(Math.round(average( SCRIPTS.filter(s => !s.living).map(s => s.year)))); // → 188
-
-let total = 0,
-    count = 0;
-for (let script of SCRIPTS) {
-    if (script.living) {
-        total += script.year;
-        count += 1;
-    }
-}
 console.log(Math.round(total / count)); // → 1188
 
-// Two emoji characters, horse and shoe let horseShoe = "🐴👟"; console.log(horseShoe.length); // → 4 console.log(horseShoe[0]); // → (Invalid half-character) console.log(horseShoe.charCodeAt(0)); // → 55357 (Code of the half-character) console.log(horseShoe.codePointAt(0)); // → 128052 (Actual code for horse emoji)
+// Two emoji characters, horse and shoe 
+let horseShoe = "🐴👟"; console.log(horseShoe.length); // → 4 console.log(horseShoe[0]); // → (Invalid half-character) console.log(horseShoe.charCodeAt(0)); // → 55357 (Code of the half-character) console.log(horseShoe.codePointAt(0)); // → 128052 (Actual code for horse emoji)
 
 let roseDragon = "🌹🐉";
 for (let char of roseDragon) {
     console.log(char);
 } // → 🌹 // → 🐉
 
-function textScripts(text) {
-    let scripts = countBy(text, char => {
-        let script = characterScript(char.codePointAt(0));
-        return script ? script.name : "none";
-    }).filter(({
-        name
-    }) => name != "none");
-    let total = scripts.reduce((n, {
-        count
-    }) => n + count, 0);
-    if (total == 0) return "No scripts found";
-    return scripts.map(({
-        name,
-        count
-    }) => {
-        return `${Math.round(count * 100 / total)}% ${name}`;
-    }).join(", ");
-}
-console.log(textScripts('英国的狗说"woof", 俄罗斯的狗说"тяв"')); // → 61% Han, 22% Latin, 17% Cyrillic
-
-let rabbit = {};
-rabbit.speak = function (line) {
-    console.log(`The rabbit says '${line}'`);
-};
-rabbit.speak("I'm alive."); // → The rabbit says 'I'm alive.'
-
-function speak(line) {
-    console.log(`The ${this.type} rabbit says '${line}'`);
-}
-let whiteRabbit = {
-    type: "white",
-    speak
-};
-let hungryRabbit = {
-    type: "hungry",
-    speak
-};
-whiteRabbit.speak("Oh my ears and whiskers, " + "how late it's getting!"); // → The white rabbit says 'Oh my ears and whiskers, how // late it's getting!' hungryRabbit.speak("I could use a carrot right now."); // → The hungry rabbit says 'I could use a carrot right now.'
-
-function normalize() {
-    console.log(this.coords.map(n => n / this.length));
-}
-normalize.call({
-    coords: [0, 2, 3],
-    length: 5
-}); // → [0, 0.4, 0.6]
-
-let protoRabbit = {
-    speak(line) {
-        console.log(`The ${this.type} rabbit says '${line}'`);
-    }
-};
-let killerRabbit = Object.create(protoRabbit);
 killerRabbit.type = "killer";
 killerRabbit.speak("SKREEEE!"); // → The killer rabbit says 'SKREEEE!'
 

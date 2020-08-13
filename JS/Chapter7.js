@@ -2,7 +2,7 @@
  * ------------------------------------------------------
  * OBJECT 
  * ------
- * using the freeze prototype an object cant be overided
+ * using the freeze prototype - an object cant be overided
  * ------------------------------------------------------
  */
 

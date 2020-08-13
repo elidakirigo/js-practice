@@ -88,16 +88,23 @@ console.log('clientWidth : ', para.clientWidth);
  * ------------------------------------------------
  */
 
- /**
-  * -------------------------------------------------
-  * protraying styles containing hyphens in JS
-  * -------------------------------------------------
-  */
+/**
+ * -------------------------------------------------
+ * protraying styles containing hyphens in JS
+ * -------------------------------------------------
+ */
 
-  document.body.style['font-family'];
+document.getElementById('someID').style['font-family'];
 
-  /**
-   * -------------------------------------------------
-   * QUERYSELECTORALL method returns all nodelist
-   * -------------------------------------------------
-   */
+/**
+ * -------------------------------------------------
+ * QUERYSELECTORALL method returns all nodelist,
+ * NOTE : the method is not live, if you change the document, it wont change
+ * -------------------------------------------------
+ */
+
+/**
+ * -------------------------------------------------
+ * static - means you cant move the object unless the position is set.
+ * -------------------------------------------------
+ */

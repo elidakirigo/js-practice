@@ -21,5 +21,5 @@ let killerRabbit = Object.create(protoRabbit);
  * ITERATOR INTERFACE, instanceof
  * -------------------------
  */
-let myname = 'ELIDA'[Symbol.iterator]()
+let myname = 'ELIDA' [Symbol.iterator]()
 // console.log(ELIDAIterator.next());

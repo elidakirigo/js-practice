@@ -14,7 +14,6 @@ decodeURIComponent('yes%3F')
 
 fetch('example/data.txt')
     .then(res => {
-
         console.log(res.status);
         console.log(res.headers.get('Content-Type'));
         return res.text()

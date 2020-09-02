@@ -1,4 +1,5 @@
-(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+const Level = require('./levels.js');
+
 let simpleLevelPlan = `
 ......................
 ..#................#..
@@ -9,25 +10,9 @@ let simpleLevelPlan = `
 ......#++++++++++++#..
 ......##############..
 ......................`;
+
 /**
  
-class Level {
-    constructor(plan) {
-        let rows = plan.trim().split("\n").map(l => [...l]);
-        this.height = rows.length;
-        this.width = rows[0].length;
-        this.startActors = [];
-        this.rows = rows.map((row, y) => {
-            return row.map((ch, x) => {
-                let type = levelChars[ch];
-                if (typeof type == "string") return type;
-                this.startActors.push(
-                    type.create(new Vec(x, y), ch));
-                return "empty";
-            });
-        });
-    }
-}
 class State {
     constructor(level, actors, status) {
         this.level = level;
@@ -369,4 +354,3 @@ let GAME_LEVELS = [
 ]
 runGame(GAME_LEVELS, DOMDisplay);
  */
-},{}]},{},[1]);

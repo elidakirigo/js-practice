@@ -361,4 +361,8 @@ Level.prototype.touches = function (pos, size, type) {
 let simpleLevel = new Level(simpleLevelPlan);
 let display = new DOMDisplay(document.body, simpleLevel);
 display.syncState(State.start(simpleLevel));
+
+let GAME_LEVELS = [
+
+]
 runGame(GAME_LEVELS, DOMDisplay);
